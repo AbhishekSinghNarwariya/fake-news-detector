@@ -3,13 +3,14 @@ import re
 import string
 from pathlib import Path
 
+import nltk
+
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-
 # ==========================================================
-# Load Model & Vectorizer
+# Project Paths
 # ==========================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -17,17 +18,43 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "model" / "fake_news_model.pkl"
 VECTORIZER_PATH = BASE_DIR / "model" / "tfidf_vectorizer.pkl"
 
-loaded_model = joblib.load(MODEL_PATH)
-loaded_vectorizer = joblib.load(VECTORIZER_PATH)
+NLTK_DATA = Path.home() / "nltk_data"
 
+nltk.data.path.append(str(NLTK_DATA))
+
+# ==========================================================
+# Download NLTK Resources (Only if Missing)
+# ==========================================================
+
+resources = {
+    "tokenizers/punkt": "punkt",
+    "corpora/stopwords": "stopwords",
+    "corpora/wordnet": "wordnet",
+    "corpora/omw-1.4": "omw-1.4"
+}
+
+for resource_path, resource_name in resources.items():
+    try:
+        nltk.data.find(resource_path)
+    except LookupError:
+        print(f"Downloading NLTK resource: {resource_name}")
+        nltk.download(resource_name, download_dir=str(NLTK_DATA))
 
 # ==========================================================
 # Initialize NLP Tools
 # ==========================================================
 
 stop_words = set(stopwords.words("english"))
+
 lemmatizer = WordNetLemmatizer()
 
+# ==========================================================
+# Load Saved Model & Vectorizer
+# ==========================================================
+
+loaded_model = joblib.load(MODEL_PATH)
+
+loaded_vectorizer = joblib.load(VECTORIZER_PATH)
 
 # ==========================================================
 # Text Cleaning
@@ -51,7 +78,6 @@ def clean_text(text):
 
     return text
 
-
 # ==========================================================
 # Text Preprocessing
 # ==========================================================
@@ -74,7 +100,6 @@ def preprocess_text(text):
     ]
 
     return " ".join(tokens)
-
 
 # ==========================================================
 # Prediction Function
@@ -127,7 +152,6 @@ def predict_news(news_text):
 
     }
 
-
 # ==========================================================
 # Test Prediction
 # ==========================================================
@@ -141,9 +165,10 @@ if __name__ == "__main__":
 
     result = predict_news(sample_news)
 
-    print("\nPrediction Result")
-    print("=" * 40)
+    print("\n" + "=" * 50)
+    print("Prediction Result")
+    print("=" * 50)
 
-    print(f"Prediction : {result['prediction']}")
-    print(f"Confidence : {result['confidence']}%")
-    print(f"Processed  : {result['processed_text']}")
+    print(f"Prediction     : {result['prediction']}")
+    print(f"Confidence     : {result['confidence']}%")
+    print(f"Processed Text : {result['processed_text']}")
