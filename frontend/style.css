@@ -1,0 +1,1081 @@
+/* ==========================================================
+   AI Fake News Detector
+   Premium UI - Part 2A
+   ========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+:root{
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+
+    --success:#22c55e;
+    --danger:#ef4444;
+
+    --bg:#eef3ff;
+    --card:#ffffff;
+
+    --text:#222;
+    --text-light:#666;
+
+    --border:#dbe3ff;
+
+    --shadow:0 15px 40px rgba(0,0,0,.08);
+
+}
+
+body.dark{
+
+    --bg:#0f172a;
+
+    --card:#1e293b;
+
+    --text:#ffffff;
+
+    --text-light:#cbd5e1;
+
+    --border:#334155;
+
+    --shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+body{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe,
+        #bfdbfe
+    );
+
+    min-height:100vh;
+
+    color:var(--text);
+
+    transition:.35s;
+
+    padding:35px;
+
+}
+
+body.dark{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #1e293b
+    );
+
+}
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+/* ======================================
+   Premium Theme Toggle
+====================================== */
+
+.theme-switch{
+
+    position:fixed;
+
+    top:22px;
+
+    right:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    z-index:1000;
+
+}
+
+.theme-icon{
+
+    width:16px;
+
+    height:16px;
+
+    color:#64748b;
+
+    transition:.3s;
+
+}
+
+body.dark .theme-icon{
+
+    color:#cbd5e1;
+
+}
+
+.switch{
+
+    position:relative;
+
+    width:44px;
+
+    height:24px;
+
+}
+
+.switch input{
+
+    display:none;
+
+}
+
+.slider{
+
+    position:absolute;
+
+    inset:0;
+
+    cursor:pointer;
+
+    background:#e2e8f0;
+
+    border-radius:999px;
+
+    transition:.3s;
+
+}
+
+body.dark .slider{
+
+    background:#334155;
+
+}
+
+.slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    left:3px;
+
+    top:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+input:checked + .slider::before{
+
+    transform:translateX(20px);
+
+}
+
+.theme-switch:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* Theme Toggle Animation */
+
+.theme-switch{
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+.theme-hidden{
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:translateY(-10px);
+
+}
+
+/* ==============================
+   Hero
+============================== */
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.hero h1{
+
+    font-size:52px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    margin-bottom:18px;
+
+}
+
+.hero p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+/* ==============================
+   Dashboard
+============================== */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(
+        auto-fit,
+        minmax(220px,1fr)
+    );
+
+    gap:22px;
+
+    margin-bottom:35px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.3);
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+    text-align:center;
+
+}
+
+body.dark .stat-card{
+
+    background:rgba(30,41,59,.82);
+
+}
+
+.stat-card:hover{
+
+    transform:
+
+        translateY(-8px);
+
+}
+
+.stat-card h3{
+
+    color:var(--text-light);
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+}
+
+.stat-card span{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+.fake-card span{
+
+    color:var(--danger);
+
+}
+
+.real-card span{
+
+    color:var(--success);
+
+}
+
+/* ==============================
+   Main Card
+============================== */
+
+.card{
+
+    background:rgba(255,255,255,.72);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:35px;
+
+}
+
+body.dark .card{
+
+    background:rgba(30,41,59,.82);
+
+}
+
+.card h2{
+
+    margin-bottom:25px;
+
+}
+
+textarea{
+
+    width:100%;
+
+    min-height:260px;
+
+    border:none;
+
+    outline:none;
+
+    resize:vertical;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    border:2px solid var(--border);
+
+    transition:.3s;
+
+    background:white;
+
+    color:#222;
+
+}
+
+body.dark textarea{
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+textarea:focus{
+
+    border-color:var(--primary);
+
+}
+
+.info-row{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:15px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+   Premium UI - Part 2B
+   Buttons, Loading, Result Card, History
+   ========================================================== */
+
+/* ==============================
+   Buttons
+============================== */
+
+.buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+
+}
+
+button{
+
+    flex:1;
+
+    min-width:170px;
+
+    padding:15px 20px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+#predictBtn{
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color:white;
+
+    box-shadow:0 8px 25px rgba(37,99,235,.35);
+
+}
+
+#predictBtn:hover{
+
+    box-shadow:0 12px 35px rgba(37,99,235,.45);
+
+}
+
+.secondary{
+
+    background:#e5e7eb;
+
+    color:#222;
+
+}
+
+.secondary:hover{
+
+    background:#d1d5db;
+
+}
+
+body.dark .secondary{
+
+    background:#334155;
+
+    color:white;
+
+}
+
+/* ==============================
+   Loading
+============================== */
+
+.hidden{
+
+    display:none;
+
+}
+
+.loading{
+
+    text-align:center;
+
+    padding:35px 0;
+
+}
+
+.loading p{
+
+    margin-top:18px;
+
+    color:var(--text-light);
+
+}
+
+.spinner{
+
+    width:60px;
+
+    height:60px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:6px solid #dbeafe;
+
+    border-top:6px solid var(--primary);
+
+    animation:spin .9s linear infinite;
+
+}
+
+/* ==============================
+   Result Card
+============================== */
+
+.result-card{
+
+    margin-top:30px;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.78);
+
+    border:2px solid var(--border);
+
+    transition:.4s;
+
+    box-shadow:var(--shadow);
+
+}
+
+body.dark .result-card{
+
+    background:rgba(15,23,42,.85);
+
+}
+
+.result-success{
+
+    border-left:8px solid var(--success);
+
+}
+
+.result-danger{
+
+    border-left:8px solid var(--danger);
+
+}
+
+.result-card h2{
+
+    margin-bottom:20px;
+
+}
+
+.result-label{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+.confidence{
+
+    margin-top:12px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* ==============================
+   Progress Bar
+============================== */
+
+.progress{
+
+    width:100%;
+
+    height:14px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-top:15px;
+
+    background:#dbeafe;
+
+}
+
+body.dark .progress{
+
+    background:#334155;
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0;
+
+    border-radius:20px;
+
+    transition:width .9s ease;
+
+}
+
+.real{
+
+    background:linear-gradient(
+        90deg,
+        #22c55e,
+        #16a34a
+    );
+
+}
+
+.fake{
+
+    background:linear-gradient(
+        90deg,
+        #ef4444,
+        #dc2626
+    );
+
+}
+
+/* ==============================
+   Copy Button
+============================== */
+
+.copy-btn{
+
+    width:100%;
+
+    margin-top:25px;
+
+    background:linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:white;
+
+}
+
+.copy-btn:hover{
+
+    box-shadow:0 12px 35px rgba(34,197,94,.35);
+
+}
+
+/* ==============================
+   History
+============================== */
+
+.history-card{
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:35px;
+
+}
+
+body.dark .history-card{
+
+    background:rgba(30,41,59,.82);
+
+}
+
+.history-card h2{
+
+    margin-bottom:20px;
+
+}
+
+.history-item{
+
+    padding:15px 0;
+
+    border-bottom:1px solid var(--border);
+
+    transition:.3s;
+
+}
+
+.history-item:hover{
+
+    padding-left:8px;
+
+}
+
+.history-item:last-child{
+
+    border-bottom:none;
+
+}
+
+/* ==========================================================
+   Premium UI - Part 2C
+   Features, Footer, Animations & Responsive
+   ========================================================== */
+
+/* ==============================
+   Feature Cards
+============================== */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.feature-box{
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+    font-size:40px;
+
+}
+
+body.dark .feature-box{
+
+    background:rgba(30,41,59,.82);
+
+}
+
+.feature-box:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.feature-box h3{
+
+    margin-top:15px;
+
+    margin-bottom:12px;
+
+    font-size:22px;
+
+    color:var(--text);
+
+}
+
+.feature-box p{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+/* ==============================
+   Footer
+============================== */
+
+footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    padding-bottom:30px;
+
+}
+
+footer p:first-child{
+
+    font-weight:600;
+
+}
+
+/* ==============================
+   Animations
+============================== */
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.hero,
+.dashboard,
+.card,
+.history-card,
+.features{
+
+    animation:fadeUp .8s ease;
+
+}
+
+/* ==============================
+   Scrollbar
+============================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#dbeafe;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+}
+
+body.dark ::-webkit-scrollbar-track{
+
+    background:#1e293b;
+
+}
+
+/* ==============================
+   Mobile Responsive
+============================== */
+
+@media(max-width:992px){
+
+    .hero h1{
+
+        font-size:42px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        padding:20px;
+
+    }
+
+    .card{
+
+        padding:25px;
+
+    }
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+    button{
+
+        width:100%;
+
+    }
+
+    textarea{
+
+        min-height:220px;
+
+    }
+
+    .hero h1{
+
+        font-size:34px;
+
+    }
+
+    .hero p{
+
+        font-size:16px;
+
+    }
+
+    .theme-toggle{
+
+        width:48px;
+
+        height:48px;
+
+        right:15px;
+
+        top:15px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+
+        font-size:28px;
+
+    }
+
+    .result-label{
+
+        font-size:24px;
+
+    }
+
+    .stat-card span{
+
+        font-size:34px;
+
+    }
+
+}
+
+
+@media (max-width: 900px){
+
+    .theme-switch{
+
+        transform:scale(.82);
+
+        top:12px;
+
+        right:8px;
+
+    }
+
+}
+
+@media (max-width: 700px){
+
+    .theme-switch{
+
+        transform:scale(.72);
+
+        top:10px;
+
+        right:5px;
+
+    }
+
+}

@@ -1,19 +1,44 @@
+# ================================
+# Python
+# ================================
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
 # Virtual Environment
 venv/
+.env
 
-# Python Cache
-__pycache__/
-*.pyc
-
-# Jupyter Notebook Checkpoints
-.ipynb_checkpoints/
-
-# Model Files (optional)
-*.pkl
+# Flask
+instance/
+.flaskenv
 
 # VS Code
 .vscode/
 
-# Operating System Files
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
 .DS_Store
+
+# Windows
 Thumbs.db
+
+# Logs
+*.log
+
+# Python Cache
+.pytest_cache/
+.mypy_cache/
+
+# Build Files
+build/
+dist/
+*.egg-info/
+
+# Temporary Files
+*.tmp
+*.temp

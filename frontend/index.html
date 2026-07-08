@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Fake News Detector</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+<body>
+
+    <!-- ===================== -->
+    <!-- Dark Mode Toggle -->
+    <!-- ===================== -->
+
+   <div class="theme-switch">
+
+        <i data-lucide="sun" class="theme-icon"></i>
+    
+        <label class="switch">
+        
+            <input
+                type="checkbox"
+                id="themeToggle"
+            >
+        
+            <span class="slider"></span>
+        
+        </label>
+    
+        <i data-lucide="moon" class="theme-icon"></i>
+    
+    </div>
+
+    <div class="container">
+
+        <!-- ===================== -->
+        <!-- Hero -->
+        <!-- ===================== -->
+
+        <section class="hero">
+
+            <h1> AI Fake News Detector</h1>
+
+            <p>
+                Detect whether a news article is
+                <strong>Fake</strong> or
+                <strong>Real</strong>
+                using Machine Learning and Natural Language Processing.
+            </p>
+
+        </section>
+
+        <!-- ===================== -->
+        <!-- Dashboard -->
+        <!-- ===================== -->
+
+        <section class="dashboard">
+
+            <div class="stat-card">
+
+                <h3>Total Predictions</h3>
+
+                <span id="totalPredictions">0</span>
+
+            </div>
+
+            <div class="stat-card fake-card">
+
+                <h3>Fake News</h3>
+
+                <span id="fakeCount">0</span>
+
+            </div>
+
+            <div class="stat-card real-card">
+
+                <h3>Real News</h3>
+
+                <span id="realCount">0</span>
+
+            </div>
+
+        </section>
+
+        <!-- ===================== -->
+        <!-- Main Card -->
+        <!-- ===================== -->
+
+        <div class="card">
+
+            <h2>Analyze News</h2>
+
+            <textarea
+                id="newsInput"
+                placeholder="Paste your complete news article here..."
+            ></textarea>
+
+            <div class="info-row">
+
+                <span id="charCount">
+
+                    Characters: 0
+
+                </span>
+
+            </div>
+
+            <div class="buttons">
+
+                <button id="predictBtn">
+
+                    🔍 Detect News
+
+                </button>
+
+                <button id="sampleBtn" class="secondary">
+
+                     Sample
+
+                </button>
+
+                <button id="clearBtn" class="secondary">
+
+                     Clear
+
+                </button>
+
+            </div>
+
+            <!-- Loading -->
+
+            <div id="loading" class="loading hidden">
+
+                <div class="spinner"></div>
+
+                <p>
+
+                    AI is analyzing the article...
+
+                </p>
+
+            </div>
+
+            <!-- Result -->
+
+            <div class="result-card" id="resultCard">
+
+                <h2>
+
+                    Prediction Result
+
+                </h2>
+
+                <div id="resultText">
+
+                    Waiting for analysis...
+
+                </div>
+
+                <button id="copyBtn" class="copy-btn">
+
+                    📋 Copy Result
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ===================== -->
+        <!-- History -->
+        <!-- ===================== -->
+
+        <section class="history-card">
+
+            <h2>
+
+                🕒 Recent Predictions
+
+            </h2>
+
+            <div id="historyList">
+
+                No predictions yet.
+
+            </div>
+
+        </section>
+
+        <!-- ===================== -->
+        <!-- Features -->
+        <!-- ===================== -->
+
+        <section class="features">
+
+            <div class="feature-box">
+
+                ⚡
+
+                <h3>
+
+                    Fast Prediction
+
+                </h3>
+
+                <p>
+
+                    Get predictions within seconds.
+
+                </p>
+
+            </div>
+
+            <div class="feature-box">
+
+                🤖
+
+                <h3>
+
+                    Machine Learning
+
+                </h3>
+
+                <p>
+
+                    Logistic Regression + TF-IDF Vectorizer.
+
+                </p>
+
+            </div>
+
+            <div class="feature-box">
+
+                📊
+
+                <h3>
+
+                    Confidence Score
+
+                </h3>
+
+                <p>
+
+                    Understand how confident the model is.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+
+        <p>
+
+            Built with  using
+            Python,
+            Flask,
+            Scikit-learn,
+            HTML,
+            CSS &
+            JavaScript
+
+        </p>
+
+        <p>
+
+            © 2026 AI Fake News Detector
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+

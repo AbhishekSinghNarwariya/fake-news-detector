@@ -1,0 +1,43 @@
+### Home
+GET http://127.0.0.1:5000/
+
+### Health Check
+GET http://127.0.0.1:5000/health
+
+###
+
+### Predict News
+POST http://127.0.0.1:5000/predict
+Content-Type: application/json
+
+{
+    "news": "Scientists discovered a new species of butterfly in the Amazon rainforest."
+}
+
+###
+
+### Empty News
+POST http://127.0.0.1:5000/predict
+Content-Type: application/json
+
+{
+    "news": ""
+}
+
+###
+
+### Spaces Only
+POST http://127.0.0.1:5000/predict
+Content-Type: application/json
+
+{
+    "news": "      "
+}
+
+###
+
+### Missing News Field
+POST http://127.0.0.1:5000/predict
+Content-Type: application/json
+
+{}
